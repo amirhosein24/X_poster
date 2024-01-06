@@ -1,2 +1,2 @@
-# X_poster
-post tweet with a bot
+# X
+data scrape from x profile
