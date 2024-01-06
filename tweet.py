@@ -8,10 +8,10 @@ with open("creds.json", encoding='utf-8') as file:
 consumer_key = data["apikey" ]
 consumer_secret = data["apikeysecret"]
 
-
+proxies = {'http': 'socks5://localhost:2080', 'https': 'socks5://localhost:2080'}
 request_token_url = "https://api.twitter.com/oauth/request_token?oauth_callback=oob&x_auth_access_type=write"
-oauth = OAuth1Session(consumer_key, client_secret=consumer_secret)
 
+oauth = OAuth1Session(consumer_key, client_secret=consumer_secret, proxies=proxies)
 fetch_response = oauth.fetch_request_token(request_token_url)
 resource_owner_key = fetch_response.get("oauth_token")
 resource_owner_secret = fetch_response.get("oauth_token_secret")
@@ -35,6 +35,7 @@ oauth = OAuth1Session(
     resource_owner_key=resource_owner_key,
     resource_owner_secret=resource_owner_secret,
     verifier=verifier,
+    proxies=proxies
 )
 oauth_tokens = oauth.fetch_access_token(access_token_url)
 
@@ -46,11 +47,12 @@ oauth = OAuth1Session(
     client_secret=consumer_secret,
     resource_owner_key=access_token,
     resource_owner_secret=access_token_secret,
+    proxies=proxies
 )
 
 
 def posttweet():
-    response = oauth.post( "https://api.twitter.com/2/tweets", json={"text": data["tweet"]})
+    response = oauth.post("https://api.twitter.com/2/tweets", json={"text": data["tweet"]}, proxies=proxies)
 
     if response.status_code != 201:
         tellbot.sendtoadmin("error 201")

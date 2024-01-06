@@ -11,8 +11,8 @@ with open("creds.json") as file:
 
 code_glob = None
 request = Request(proxy_url='socks5://localhost:2080')
-bot = Bot(token=data["telbottoken"])#, request=request
-updater = Updater(token=data["telbottoken"], use_context=True)#, request_kwargs={'proxy_url': 'socks5://localhost:2080'}
+bot = Bot(token=data["telbottoken"], request=request)#
+updater = Updater(token=data["telbottoken"], use_context=True, request_kwargs={'proxy_url': 'socks5://localhost:2080'})#
 code_event = Event()
 
 def sendtoadmin(text):
