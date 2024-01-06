@@ -5,6 +5,7 @@ with open("creds.json") as file:
     data = json.load(file)
 
 consumer_key = data["apikey" ]
+print(consumer_key)
 consumer_secret = data["apikeysecret"]
 access_token = data["accesstoken"]
 access_token_secret = data["accesstokensecret"]
