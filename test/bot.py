@@ -1,7 +1,8 @@
 import json
 import tweepy
 
-with open("creds.json") as file:
+
+with open(__file__[:-6]+"creds.json") as file:
     data = json.load(file)
 
 consumer_key = data["apikey" ]

@@ -6,7 +6,7 @@ from telegram    import Bot
 from telegram.utils.request import Request
 from telegram.ext import Updater, CallbackContext, MessageHandler, Filters
 
-with open("creds.json") as file:
+with open(__file__[:-10]+"creds.json") as file:
     data = load(file)
 
 code_glob = None
