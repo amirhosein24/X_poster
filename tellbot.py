@@ -2,10 +2,9 @@
 import creds
 
 from threading import Event
-from telegram import Update
 from telegram    import Bot
 from telegram.utils.request import Request
-from telegram.ext import Updater, CallbackContext, MessageHandler, Filters
+from telegram.ext import Updater, MessageHandler, Filters
 
 code_glob = None
 request = Request(proxy_url='socks5://localhost:2080')
@@ -16,7 +15,7 @@ code_event = Event()
 def sendtoadmin(text):
     bot.send_message(chat_id=creds.admin, text=text)
 
-def echo(update: Update, context: CallbackContext):
+def echo(update, context):
     global code_glob
     code_glob = update.message.text
 

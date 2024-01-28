@@ -20,7 +20,7 @@ The scripts work together to send an automated tweet daily at 9 PM:
 - `creds.json` - for storing Credentials
 
 ## json format for Credentials
-
+```
 {
     "apikey" : "tweeter-api-token",
     "apikeysecret" : "tweeter-apisecret-token",
@@ -28,3 +28,4 @@ The scripts work together to send an automated tweet daily at 9 PM:
     "admin" : "your-telegram-chatid",
     "tweet" : "text-to-post"
 }
+```

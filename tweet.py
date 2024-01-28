@@ -1,9 +1,9 @@
-import creds
+import tellbot
+import time
 from requests_oauthlib import OAuth1Session
 
-
-consumer_key = creds.apikey
-consumer_secret = creds.apikeysecret
+consumer_key = tellbot.creds.apikey
+consumer_secret = tellbot.creds.apikeysecret
 
 proxies = {'http': 'socks5://localhost:2080', 'https': 'socks5://localhost:2080'}
 request_token_url = "https://api.twitter.com/oauth/request_token?oauth_callback=oob&x_auth_access_type=write"
@@ -15,12 +15,7 @@ resource_owner_secret = fetch_response.get("oauth_token_secret")
 base_authorization_url = "https://api.twitter.com/oauth/authorize"
 authorization_url = oauth.authorization_url(base_authorization_url)
 
-
-import tellbot
-import time
-
 verifier = tellbot.getpin(authorization_url)
-
 while verifier is None:
     time.sleep(2)
 
@@ -42,11 +37,8 @@ oauth = OAuth1Session(
     resource_owner_key=access_token,
     resource_owner_secret=access_token_secret)
 
-
 def posttweet():
-    response = oauth.post("https://api.twitter.com/2/tweets", json={"text": creds.tweet}, proxies=proxies)
-
+    response = oauth.post("https://api.twitter.com/2/tweets", json={"text": tellbot.creds.tweet}, proxies=proxies)
     if response.status_code != 201:
         tellbot.sendtoadmin(f"error 201\n{response.json()}")
-
     tellbot.sendtoadmin(str(response.json()))
