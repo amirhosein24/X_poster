@@ -13,9 +13,9 @@ def startwaiter():
             if now.hour == 21 and now.minute == 0:
                 tweet.posttweet()
                 tweet.tellbot.sendtoadmin("sleeping for 24 h")
-                sleep(86400 - 60) # wait 1 min less than 24 h
+                sleep(604800 - 600) # wait 1 min less than 24 h
             else: # wait every 10 sec until its in a correct time loop
-                sleep(5)
+                sleep(40)
         except Exception as e:
             tweet.tellbot.sendtoadmin(f"error main loop:\n{e}")
 
